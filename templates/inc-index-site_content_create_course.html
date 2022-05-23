@@ -41,15 +41,17 @@
         <p>You can view more free HTML5 web templates <a href="http://www.html5webtemplates.co.uk">here</a>.</p>
         <p>This template is a fully functional 5 page website, with an <a href="examples.html">examples</a> page
             that gives examples of all the styles available with this design.</p>
-        <h2><li><a href="/create-category/">Создать новую категорию</a></li></h2>
-        <h3>Список существующих категорий</h3>
         <div>
-            {% for item in objects_list %}
-            <li>
-                {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
-                <a href="/courses-list/?id={{item.id}}">Показать курсы</a>
-            </li>
-            {% endfor %}
-	    </div>
+            <a href="/courses-list/?id={{id}}">назад</a>
+        </div>
+        <br>
+        <br>
+        <div>
+            <h1>Создание курса для категории "{{name}}"</h1>
+            <form method="post">
+                <input type="text" name="name" placeholder="Название">
+                <button type="submit">Сохранить и вернуться к списку курсов</button>
+            </form>
+        </div>
     </div>
 </div>
