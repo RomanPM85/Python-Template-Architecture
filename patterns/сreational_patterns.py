@@ -1,5 +1,5 @@
-from copy import deepcopy
-from quopri import decodestring
+import copy
+import quopri
 
 
 # абстрактный пользователь
@@ -17,6 +17,7 @@ class Student(User):
     pass
 
 
+# порождающий паттерн Абстрактная фабрика - фабрика пользователей
 class UserFactory:
     types = {
         'student': Student,
@@ -29,12 +30,12 @@ class UserFactory:
         return cls.types[type_]()
 
 
-# порождающий паттерн Прототип
+# порождающий паттерн Прототип - Курс
 class CoursePrototype:
     # прототип курсов обучения
 
     def clone(self):
-        return deepcopy(self)
+        return copy.deepcopy(self)
 
 
 class Course(CoursePrototype):
@@ -45,30 +46,19 @@ class Course(CoursePrototype):
         self.category.courses.append(self)
 
 
-# интерактивный курс
+# Интерактивный курс
 class InteractiveCourse(Course):
     pass
 
 
-# курс в записи
+# Курс в записи
 class RecordCourse(Course):
     pass
 
 
-class CourseFactory:
-    types = {
-        'interactive': InteractiveCourse,
-        'record': RecordCourse
-    }
-
-    # порождающий паттерн Фабричный метод
-    @classmethod
-    def create(cls, type_, name, category):
-        return cls.types[type_](name, category)
-
-
-# категория
+# Категория
 class Category:
+    # реестр?
     auto_id = 0
 
     def __init__(self, name, category):
@@ -85,7 +75,20 @@ class Category:
         return result
 
 
-# основной интерфейс проекта
+# порождающий паттерн Абстрактная фабрика - фабрика курсов
+class CourseFactory:
+    types = {
+        'interactive': InteractiveCourse,
+        'record': RecordCourse
+    }
+
+    # порождающий паттерн Фабричный метод
+    @classmethod
+    def create(cls, type_, name, category):
+        return cls.types[type_](name, category)
+
+
+# Основной интерфейс проекта
 class Engine:
     def __init__(self):
         self.teachers = []
@@ -121,7 +124,7 @@ class Engine:
     @staticmethod
     def decode_value(val):
         val_b = bytes(val.replace('%', '=').replace("+", " "), 'UTF-8')
-        val_decode_str = decodestring(val_b)
+        val_decode_str = quopri.decodestring(val_b)
         return val_decode_str.decode('UTF-8')
 
 
