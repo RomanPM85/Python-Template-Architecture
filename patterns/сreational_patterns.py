@@ -1,10 +1,11 @@
-import copy
-import quopri
+from copy import deepcopy
+from quopri import decodestring
 
 
 # абстрактный пользователь
 class User:
-    pass
+    def __init__(self, name):
+        self.name = name
 
 
 # преподаватель
@@ -14,7 +15,9 @@ class Teacher(User):
 
 # студент
 class Student(User):
-    pass
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 
 # порождающий паттерн Абстрактная фабрика - фабрика пользователей
@@ -35,7 +38,7 @@ class CoursePrototype:
     # прототип курсов обучения
 
     def clone(self):
-        return copy.deepcopy(self)
+        return deepcopy(self)
 
 
 class Course(CoursePrototype):
@@ -97,8 +100,8 @@ class Engine:
         self.categories = []
 
     @staticmethod
-    def create_user(type_):
-        return UserFactory.create(type_)
+    def create_user(type_, name):
+        return UserFactory.create(type_, name)
 
     @staticmethod
     def create_category(name, category=None):
@@ -124,7 +127,7 @@ class Engine:
     @staticmethod
     def decode_value(val):
         val_b = bytes(val.replace('%', '=').replace("+", " "), 'UTF-8')
-        val_decode_str = quopri.decodestring(val_b)
+        val_decode_str = decodestring(val_b)
         return val_decode_str.decode('UTF-8')
 
 
