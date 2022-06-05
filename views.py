@@ -3,8 +3,7 @@ from datetime import date
 from simba_framework.templator import render
 from patterns.сreational_patterns import Engine, Logger
 from patterns.structural_patterns import AppRoute, Debug
-from patterns.behavioral_patterns import EmailNotifier, SmsNotifier, \
-    ListView, CreateView, BaseSerializer
+from patterns.behavioral_patterns import EmailNotifier, SmsNotifier, ListView, CreateView, BaseSerializer
 
 site = Engine()
 logger = Logger('main')

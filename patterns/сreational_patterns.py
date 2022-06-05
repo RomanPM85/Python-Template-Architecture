@@ -1,6 +1,6 @@
 from copy import deepcopy
 from quopri import decodestring
-# from behavioral_patterns import FileWriter, Subject
+from behavioral_patterns import FileWriter, Subject
 
 
 # абстрактный пользователь
@@ -16,6 +16,7 @@ class Teacher(User):
 
 # студент
 class Student(User):
+
     def __init__(self, name):
         self.courses = []
         super().__init__(name)
@@ -42,7 +43,7 @@ class CoursePrototype:
         return deepcopy(self)
 
 
-class Course(CoursePrototype):
+class Course(CoursePrototype, Subject):
 
     def __init__(self, name, category):
         self.name = name
@@ -169,9 +170,11 @@ class SingletonByName(type):
 
 class Logger(metaclass=SingletonByName):
 
-    def __init__(self, name):
+    def __init__(self, name, writer=FileWriter()):
         self.name = name
+        self.writer = writer
 
-    @staticmethod
-    def log(text):
-        print('log--->', text)
+    def log(self, text):
+        text = f'log---> {text}'
+        self.writer.write(text)
+
