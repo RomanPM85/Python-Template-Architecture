@@ -106,7 +106,6 @@ class CreateView(TemplateView):
 
 # поведенческий паттерн - Стратегия
 class ConsoleWriter:
-
     def write(self, text):
         print(text)
 

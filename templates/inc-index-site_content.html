@@ -6,16 +6,17 @@
         {% block text_content %}
             {% include "text_content.html" %}
         {% endblock text_content %}
-
-        <h2><li><a href="/create-category/">Создать новую категорию</a></li></h2>
-        <h3>Список существующих категорий</h3>
-        <div>
-            {% for item in objects_list %}
-            <li>
-                {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
-                <a href="/courses-list/?id={{item.id}}">Показать курсы</a>
-            </li>
-            {% endfor %}
-	    </div>
+        <div class="fill">
+            <h2><li><a href="/create-category/">Создать новую категорию</a></li></h2>
+            <h3>Список существующих категорий</h3>
+            <div>
+                {% for item in objects_list %}
+                <li>
+                    {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
+                    <a href="/courses-list/?id={{item.id}}">Показать курсы</a>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>

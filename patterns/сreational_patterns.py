@@ -1,5 +1,6 @@
 from copy import deepcopy
 from quopri import decodestring
+# from behavioral_patterns import FileWriter, Subject
 
 
 # абстрактный пользователь
@@ -47,6 +48,16 @@ class Course(CoursePrototype):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.students = []
+        super().__init__()
+
+    def __getitem__(self, item):
+        return self.students[item]
+
+    def add_student(self, student: Student):
+        self.students.append(student)
+        student.courses.append(self)
+        self.notify()
 
 
 # Интерактивный курс
@@ -123,6 +134,11 @@ class Engine:
             if item.name == name:
                 return item
         return None
+
+    def get_student(self, name) -> Student:
+        for item in self.students:
+            if item.name == name:
+                return item
 
     @staticmethod
     def decode_value(val):

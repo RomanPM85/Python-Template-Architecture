@@ -6,18 +6,20 @@
         {% block text_content %}
             {% include "text_content.html" %}
         {% endblock text_content %}
-        <a href="/">назад</a>
-        <h1>Список категорий</h1>
-        <ul>
-            {% for item in objects_list %}
-            <li>
-                {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
-            </li>
-            {% endfor %}
-        </ul>
-        <div>
-            <li><a href="/courses-list/">Список курсов</a></li>
-            <li><a href="/create-course/">Создать курс</a></li>
+        <div class="fill">
+            <a href="/">назад</a>
+            <h1>Список категорий</h1>
+            <ul>
+                {% for item in objects_list %}
+                <li>
+                    {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <div>
+                <li><a href="/courses-list/">Список курсов</a></li>
+                <li><a href="/create-course/">Создать курс</a></li>
+            </div>
         </div>
     </div>
 </div>

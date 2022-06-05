@@ -6,20 +6,22 @@
         {% block text_content %}
             {% include "text_content.html" %}
         {% endblock text_content %}
-        <div>
-            <a href="/">назад на главную</a>
-        </div>
-        <br>
-        <br>
-        <div>
-            <a href="/create-course/?id={{id}}">Создать новый курс</a>
+        <div class="fill">
+            <div>
+                <a href="/">назад на главную</a>
+            </div>
             <br>
-            <h1>Список курсов для категории "{{name}}"</h1>
-            {% for item in objects_list %}
-            <li>
-                {{item.name}} <span><a href="/copy-course/?name={{item.name}}">скопировать</a></span>
-            </li>
-            {% endfor %}
+            <br>
+            <div>
+                <a href="/create-course/?id={{id}}">Создать новый курс</a>
+                <br>
+                <h1>Список курсов для категории "{{name}}"</h1>
+                {% for item in objects_list %}
+                <li>
+                    {{item.name}} <span><a href="/copy-course/?name={{item.name}}">скопировать</a></span>
+                </li>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
