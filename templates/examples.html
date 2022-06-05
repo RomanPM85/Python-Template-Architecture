@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+    black &amp; white examples
+{% endblock title %}
+
+{% block style %}
+	{% include "inc-style.html" %}
+{% endblock style %}
+{% block main %}
+    {% block header %}
+        {% include "inc-header.html" %}
+    {% endblock header %}
+    {% block content_header %}
+        {% include "inc-content_header.html" %}
+    {% endblock content_header %}
+    {% block site_content %}
+        {% include "inc-examples-site_content.html" %}
+    {% endblock site_content %}
+    {% block content_footer %}
+        {% include "inc-content_footer.html" %}
+    {% endblock content_footer %}
+    {% block footer %}
+        {% include "inc-footer.html" %}
+    {% endblock footer %}
+{% endblock main %}
