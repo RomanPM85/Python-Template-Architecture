@@ -11,7 +11,9 @@ class User:
 
 # преподаватель
 class Teacher(User):
-    pass
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 
 # студент
@@ -50,6 +52,7 @@ class Course(CoursePrototype, Subject):
         self.category = category
         self.category.courses.append(self)
         self.students = []
+        self.teachers = []
         super().__init__()
 
     def __getitem__(self, item):
@@ -58,6 +61,11 @@ class Course(CoursePrototype, Subject):
     def add_student(self, student: Student):
         self.students.append(student)
         student.courses.append(self)
+        self.notify()
+
+    def add_student(self, teacher: Teacher):
+        self.teachers.append(teacher)
+        teacher.courses.append(self)
         self.notify()
 
 

@@ -210,3 +210,41 @@ class CourseApi:
     @Debug(name='CourseApi')
     def __call__(self, request):
         return '200 OK', BaseSerializer(site.courses).save()
+
+
+@AppRoute(routes=routes, url='/teacher-list/')
+class TeacherListView(ListView):
+    queryset = site.teacher
+    template_name = 'student_list.html'
+
+
+@AppRoute(routes=routes, url='/create-teacher/')
+class TeacherCreateView(CreateView):
+    template_name = 'create_student.html'
+
+    def create_obj(self, data: dict):
+        name = data['name']
+        name = site.decode_value(name)
+        new_obj = site.create_user('teacher', name)
+        site.teachers.append(new_obj)
+
+
+@AppRoute(routes=routes, url='/add-teacher/')
+class AddTeacherByCourseCreateView(CreateView):
+    template_name = 'add_student.html'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['courses'] = site.courses
+        context['teachers'] = site.teachers
+        return context
+
+    def create_obj(self, data: dict, teacher=None):
+        course_name = data['course_name']
+        course_name = site.decode_value(course_name)
+        course = site.get_course(course_name)
+        teacher_name = data['teacher_name']
+        teacher_name = site.decode_value(teacher_name)
+        student = site.teacher(teacher_name)
+        course.add_teacher(teacher)
+        
